@@ -19,7 +19,7 @@ export const CartButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 0.5625rem;
-  color: white;
+  color: ${({ theme }) => theme.colors.white};
   padding: 0.625rem;
   cursor: pointer;
   background: transparent;
