@@ -9,7 +9,13 @@ export default function Home() {
 
       <main className="flex flex-1 flex-row flex-wrap justify-center gap-6.25 px-[8.53125rem] py-47.25">
         {Array.from({ length: 8 }).map((_, index) => (
-          <ProductCard key={index} />
+          <ProductCard
+            key={index}
+            title={`Produto ${index + 1}`}
+            description="Descrição do produto que pode ser um pouco longa para testar o truncamento."
+            price={0.5 + index * 0.1}
+            imageUrl="https://softstar.s3.amazonaws.com/items/star-wand.png"
+          />
         ))}
 
       </main>
