@@ -11,7 +11,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ title, description, price, imageUrl }: ProductCardProps) {
   return (
-    <div className="bg-card-background py-6.5 px-6 w-full max-w-86.25 rounded-lg h-max">
+    <li className="bg-card-background py-6.5 px-6 w-full max-w-86.25 rounded-lg h-max">
 
       <div className="flex flex-col gap-12.25">
 
@@ -35,6 +35,6 @@ export default function ProductCard({ title, description, price, imageUrl }: Pro
         </div>
       </div>
 
-    </div>
+    </li>
   )
 }
