@@ -11,13 +11,13 @@ interface HomeProps {
 }
 
 export default function Home({ initialData }: HomeProps) {
-  console.log(initialData);
+  const percent = (initialData.products.length / initialData.count) * 100;
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-white">
       <Header />
 
-      <main className="flex-1 px-[8.53125rem] py-47.25">
+      <main className="flex-1 px-[8.53125rem] py-47.25 flex flex-col gap-47.25">
         <ul className="flex flex-row flex-wrap justify-center gap-6.25">
           {initialData.products.map((product) => (
             <ProductCard
@@ -29,6 +29,20 @@ export default function Home({ initialData }: HomeProps) {
             />
           ))}
         </ul>
+
+        <div className="flex justify-center">
+
+          <div className="flex flex-col gap-2.75 w-max">
+
+            <div className="flex w-full h-2.5 bg-[#393939] rounded-lg">
+              <div className="bg-primary rounded-lg" style={{ width: `${percent}%` }} />
+            </div>
+
+            <button className="px-31.75 py-7.5 w-max bg-[#393939] rounded-lg text-xl leading-6.5 font-semibold">
+              Carregar mais
+            </button>
+          </div>
+        </div>
 
       </main>
 
