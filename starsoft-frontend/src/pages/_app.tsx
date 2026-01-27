@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react';
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { PageContainer } from "../styles/globals";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -22,9 +23,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <PersistGate loading={null} persistor={persistor}>
           <QueryClientProvider client={queryClient}>
             <StyledComponentsRegistry>
-              <Header />
-              <Component {...pageProps} />
-              <Footer />
+              <PageContainer>
+                <Header />
+                <Component {...pageProps} />
+                <Footer />
+              </PageContainer>
             </StyledComponentsRegistry>
           </QueryClientProvider>
         </PersistGate>

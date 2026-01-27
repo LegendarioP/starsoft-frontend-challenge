@@ -15,6 +15,16 @@ export const Main = styled.main`
   display: flex;
   flex-direction: column;
   gap: 11.8125rem;
+
+  @media (max-width: 768px) {
+    padding: 4rem 2rem;
+    gap: 4rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
 `;
 
 export const ProductGrid = styled.ul`
@@ -28,6 +38,7 @@ export const ProductGrid = styled.ul`
 export const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
+  width:100%;
 `;
 
 export const PaginationContent = styled.div`
@@ -35,7 +46,13 @@ export const PaginationContent = styled.div`
   flex-direction: column;
   gap: 0.6875rem;
   width: max-content;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
 `;
+
 
 export const ProgressBarContainer = styled.div`
   display: flex;
@@ -72,4 +89,10 @@ export const LoadMoreButton = styled.button`
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  @media (max-width: 768px) {
+    padding: 1.875rem 0;
+    width: 100%;
+  }
+
 `;

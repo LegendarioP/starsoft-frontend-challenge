@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
   * {
@@ -41,4 +41,13 @@ export const GlobalStyles = createGlobalStyle`
     max-width: 100%;
     display: block;
   }
+`;
+
+
+export const PageContainer = styled.div`
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.white};
 `;

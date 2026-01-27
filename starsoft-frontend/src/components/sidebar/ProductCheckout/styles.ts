@@ -13,6 +13,11 @@ export const CheckoutContainer = styled(motion.div)`
 
 export const ImageWrapper = styled.div`
   display: flex;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
 `;
 
 export const ImageContainer = styled.div`

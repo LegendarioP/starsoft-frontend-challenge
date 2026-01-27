@@ -23,6 +23,11 @@ export const DrawerPanel = styled(motion.div)`
   padding: 3.9375rem 1.9375rem;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
 `;
 
 export const Header = styled.div`
@@ -33,6 +38,13 @@ export const Header = styled.div`
   flex-direction: row;
   gap: 5.25rem;
   align-items: center;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+    gap: 1rem;
+  }
+
 `;
 
 export const BackButton = styled.button`
@@ -50,6 +62,11 @@ export const BackButton = styled.button`
   &:hover {
     opacity: 0.9;
   }
+
+  @media (max-width: 768px) {
+    width: 2.875rem;
+    height: 2.875rem;
+  }
 `;
 
 export const ArrowIcon = styled.div`
@@ -59,12 +76,24 @@ export const ArrowIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    width: 1.5125rem;
+    height: 1.5125rem;
+  }
+
 `;
 
 export const Title = styled.span`
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+  }
+
 `;
 
 export const ItemsContainer = styled.div`
