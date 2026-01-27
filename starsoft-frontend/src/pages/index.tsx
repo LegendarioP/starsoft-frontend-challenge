@@ -1,12 +1,9 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
 import { getProducts } from "@/services/products";
 import {
   LoadMoreButton,
   Main,
-  PageContainer,
   PaginationContainer,
   PaginationContent,
   ProductGrid,
@@ -41,46 +38,40 @@ export default function Home({ initialData }: HomeProps) {
   const displayProducts = products.length > 0 ? products : allProducts;
 
   return (
-    <PageContainer>
-      <Header />
+    <Main>
+      <ProductGrid>
+        {displayProducts.map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            title={product.name}
+            description={product.description}
+            price={parseFloat(product.price)}
+            imageUrl={product.image}
+            createdAt={product.createdAt}
+          />
+        ))}
+      </ProductGrid>
 
-      <Main>
-        <ProductGrid>
-          {displayProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              title={product.name}
-              description={product.description}
-              price={parseFloat(product.price)}
-              imageUrl={product.image}
-              createdAt={product.createdAt}
+      <PaginationContainer>
+        <PaginationContent>
+          <ProgressBarContainer>
+            <ProgressBar
+              initial={{ width: "0%" }}
+              animate={{ width: `${paginationPercent}%` }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
             />
-          ))}
-        </ProductGrid>
+          </ProgressBarContainer>
 
-        <PaginationContainer>
-          <PaginationContent>
-            <ProgressBarContainer>
-              <ProgressBar
-                initial={{ width: "0%" }}
-                animate={{ width: `${paginationPercent}%` }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              />
-            </ProgressBarContainer>
-
-            <LoadMoreButton
-              onClick={() => loadMore()}
-              disabled={isLoadingMore || !hasMore}
-            >
-              {hasMore ? isLoadingMore ? 'Carregando...' : 'Carregar mais' : "Você ja viu tudo"}
-            </LoadMoreButton>
-          </PaginationContent>
-        </PaginationContainer>
-      </Main>
-
-      <Footer />
-    </PageContainer>
+          <LoadMoreButton
+            onClick={() => loadMore()}
+            disabled={isLoadingMore || !hasMore}
+          >
+            {hasMore ? isLoadingMore ? 'Carregando...' : 'Carregar mais' : "Você ja viu tudo"}
+          </LoadMoreButton>
+        </PaginationContent>
+      </PaginationContainer>
+    </Main>
   );
 }
 

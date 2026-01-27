@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { addToCart } from "@/store/slices/cartSlice";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import PriceBadge from "../PriceBadge";
 import {
   BuyButton,
@@ -25,6 +26,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ id, title, description, price, imageUrl, createdAt }: ProductCardProps) {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const cartItems = useAppSelector((state) => state.cart.items);
 
   const isProductInCart = cartItems.some((item) => item.id === id);
@@ -38,6 +40,10 @@ export default function ProductCard({ id, title, description, price, imageUrl, c
       image: imageUrl,
       createdAt,
     }));
+  };
+
+  const handleCardClick = () => {
+    router.push(`/products/${id}`);
   };
 
   return (
@@ -54,12 +60,12 @@ export default function ProductCard({ id, title, description, price, imageUrl, c
       }}
     >
       <CardContent>
-        <ImageContainer>
+        <ImageContainer onClick={handleCardClick} style={{ cursor: "pointer" }}>
           <Image src={imageUrl} alt={title} width={216} height={216} />
         </ImageContainer>
 
         <InfoContainer>
-          <Title>{title}</Title>
+          <Title onClick={handleCardClick} style={{ cursor: "pointer" }}>{title}</Title>
           <Description>{description}</Description>
 
           <PriceContainer>
@@ -67,7 +73,10 @@ export default function ProductCard({ id, title, description, price, imageUrl, c
             <PriceBadge price={price} />
 
             <BuyButton
-              onClick={!isProductInCart ? handleAddToCart : undefined}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (!isProductInCart) handleAddToCart();
+              }}
               whileHover={{
                 scale: 1.05,
               }}
