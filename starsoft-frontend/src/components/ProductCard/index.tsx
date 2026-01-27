@@ -60,12 +60,26 @@ export default function ProductCard({ id, title, description, price, imageUrl, c
       }}
     >
       <CardContent>
-        <ImageContainer onClick={handleCardClick} style={{ cursor: "pointer" }}>
+        <ImageContainer
+          onClick={handleCardClick}
+          style={{ cursor: "pointer" }}
+          role="button"
+          tabIndex={0}
+          aria-label={`Ver detalhes de ${title}`}
+          onKeyDown={(e) => e.key === 'Enter' && handleCardClick()}
+        >
           <Image src={imageUrl} alt={title} width={216} height={216} />
         </ImageContainer>
 
         <InfoContainer>
-          <Title onClick={handleCardClick} style={{ cursor: "pointer" }}>{title}</Title>
+          <Title
+            onClick={handleCardClick}
+            style={{ cursor: "pointer" }}
+            role="button"
+            tabIndex={0}
+            aria-label={`Ver detalhes de ${title}`}
+            onKeyDown={(e) => e.key === 'Enter' && handleCardClick()}
+          >{title}</Title>
           <Description>{description}</Description>
 
           <PriceContainer>
@@ -89,6 +103,7 @@ export default function ProductCard({ id, title, description, price, imageUrl, c
                 damping: 17
               }}
               disabled={isProductInCart}
+              aria-label={isProductInCart ? `${title} já está no carrinho` : `Adicionar ${title} ao carrinho`}
             >
               {isProductInCart ? 'Adicionado ao Carrinho' : 'Comprar'}
             </BuyButton>

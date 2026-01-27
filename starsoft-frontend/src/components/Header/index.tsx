@@ -28,7 +28,10 @@ export default function Header() {
   return (
     <HeaderContainer>
       <Image src={brand} alt="Starsoft brand" width={101} height={38} />
-      <CartButton onClick={() => dispatch(openCart())}>
+      <CartButton
+        onClick={() => dispatch(openCart())}
+        aria-label={`Abrir carrinho de compras. ${totalItems} ${totalItems === 1 ? 'item' : 'itens'} no carrinho`}
+      >
         <motion.div animate={controls}>
           <BagIcon>
             <Icons.Bag />

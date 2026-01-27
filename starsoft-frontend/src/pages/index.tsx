@@ -66,6 +66,8 @@ export default function Home({ initialData }: HomeProps) {
           <LoadMoreButton
             onClick={() => loadMore()}
             disabled={isLoadingMore || !hasMore}
+            aria-label={hasMore ? (isLoadingMore ? 'Carregando mais produtos' : 'Carregar mais produtos') : 'Todos os produtos foram carregados'}
+            aria-busy={isLoadingMore}
           >
             {hasMore ? isLoadingMore ? 'Carregando...' : 'Carregar mais' : "Você ja viu tudo"}
           </LoadMoreButton>

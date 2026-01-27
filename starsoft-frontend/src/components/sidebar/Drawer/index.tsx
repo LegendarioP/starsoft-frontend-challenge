@@ -78,7 +78,10 @@ export default function SidebarDrawer() {
             onClick={(e) => e.stopPropagation()}
           >
             <Header>
-              <BackButton onClick={handleClose}>
+              <BackButton
+                onClick={handleClose}
+                aria-label="Fechar carrinho de compras"
+              >
                 <ArrowIcon>
                   <Icons.ArrowLeft />
                 </ArrowIcon>
@@ -86,9 +89,9 @@ export default function SidebarDrawer() {
               <Title>Mochila de Compras</Title>
             </Header>
 
-            <ItemsContainer>
+            <ItemsContainer role="list" aria-label="Itens no carrinho">
               {items.length === 0 ? (
-                <EmptyCart>
+                <EmptyCart role="status" aria-live="polite">
                   <p>Seu carrinho está vazio</p>
                 </EmptyCart>
               ) : (
@@ -104,7 +107,7 @@ export default function SidebarDrawer() {
             </ItemsContainer>
 
             <Footer>
-              <TotalRow>
+              <TotalRow aria-label={`Total da compra: ${total} ETH`}>
                 <TotalLabel>Total</TotalLabel>
                 <TotalPrice>
                   <Image src={ethereum} alt="Ethereum" width={29} height={29} />
@@ -112,7 +115,10 @@ export default function SidebarDrawer() {
                 </TotalPrice>
               </TotalRow>
 
-              <CheckoutButton disabled={items.length === 0}>
+              <CheckoutButton
+                disabled={items.length === 0}
+                aria-label={items.length === 0 ? "Carrinho vazio. Adicione itens para finalizar a compra" : `Finalizar compra de ${items.length} ${items.length === 1 ? 'item' : 'itens'}`}
+              >
                 Finalizar Compra
               </CheckoutButton>
             </Footer>

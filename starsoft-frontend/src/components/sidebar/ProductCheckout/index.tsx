@@ -51,7 +51,10 @@ export default function ProductCheckout({ item }: ProductCheckoutProps) {
 
         <ActionsRow>
           <QuantityControl>
-            <QuantityButton onClick={() => dispatch(decrementQuantity(item.id))}>
+            <QuantityButton
+              onClick={() => dispatch(decrementQuantity(item.id))}
+              aria-label={`Diminuir quantidade de ${item.name}`}
+            >
               <Icons.Minus />
             </QuantityButton>
             <QuantityInput
@@ -62,13 +65,20 @@ export default function ProductCheckout({ item }: ProductCheckoutProps) {
               type="text"
               value={item.quantity}
               readOnly
+              aria-label={`Quantidade: ${item.quantity}`}
             />
-            <QuantityButton onClick={() => dispatch(incrementQuantity(item.id))}>
+            <QuantityButton
+              onClick={() => dispatch(incrementQuantity(item.id))}
+              aria-label={`Aumentar quantidade de ${item.name}`}
+            >
               <Icons.Plus />
             </QuantityButton>
           </QuantityControl>
 
-          <RemoveButton onClick={() => dispatch(removeFromCart(item.id))}>
+          <RemoveButton
+            onClick={() => dispatch(removeFromCart(item.id))}
+            aria-label={`Remover ${item.name} do carrinho`}
+          >
             <TrashIcon>
               <Icons.TrashCan />
             </TrashIcon>
