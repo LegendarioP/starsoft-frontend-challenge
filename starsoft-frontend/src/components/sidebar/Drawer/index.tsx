@@ -94,7 +94,7 @@ export default function SidebarDrawer() {
             <span>Total</span>
             <div className="flex flex-row gap-2.5 items-center">
               <Image src={ethereum} alt="Ethereum" width={29} height={29} />
-              <p className="text-xl font-semibold">{total.toFixed(2)} ETH</p>
+              <p className="text-xl font-semibold">{total} ETH</p>
             </div>
           </div>
 
