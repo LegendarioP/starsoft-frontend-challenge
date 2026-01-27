@@ -1,19 +1,25 @@
 import { Icons } from "@/components/icons/AppIcons";
 import ProductCheckout from "@/components/sidebar/ProductCheckout";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { cn } from "@/lib/utils";
+import { closeCart } from "@/store/slices/cartSlice";
 
 import ethereum from "@/assets/ethereum.png";
 import Image from "next/image";
-import { ComponentProps, useEffect } from "react";
-
-interface DrawerProps extends ComponentProps<"div"> {
-  isOpen: boolean;
-  onClose: () => void;
-  closeOnOverlayClick?: boolean;
-}
+import { useEffect } from "react";
 
 
-export default function SidebarDrawer({ isOpen, onClose, closeOnOverlayClick, ...props }: DrawerProps) {
+export default function SidebarDrawer() {
+  const dispatch = useAppDispatch();
+  const { items, isOpen } = useAppSelector((state) => state.cart);
+
+  const handleClose = () => dispatch(closeCart());
+
+  const total = items.reduce(
+    (sum, item) => sum + parseFloat(item.price) * item.quantity,
+    0
+  );
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -29,13 +35,13 @@ export default function SidebarDrawer({ isOpen, onClose, closeOnOverlayClick, ..
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
-        onClose();
+        handleClose();
       }
     };
 
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   return (
     <div
@@ -44,7 +50,7 @@ export default function SidebarDrawer({ isOpen, onClose, closeOnOverlayClick, ..
         !isOpen && "hidden"
 
       )}
-      onClick={closeOnOverlayClick ? onClose : undefined}
+      onClick={handleClose}
       data-open={isOpen}
     >
       <div
@@ -58,7 +64,7 @@ export default function SidebarDrawer({ isOpen, onClose, closeOnOverlayClick, ..
         <div className="w-full h-max px-17.5 flex flex-row gap-21 items-center">
 
           <button className="w-15 h-15 flex items-center justify-center rounded-full bg-[#373737]"
-            onClick={onClose}>
+            onClick={handleClose}>
             <Icons.ArrowLeft className="w-8.25 h-8.25 cursor-pointer text-primary" />
           </button>
           <span className="text-2xl font-medium">
@@ -68,15 +74,18 @@ export default function SidebarDrawer({ isOpen, onClose, closeOnOverlayClick, ..
 
 
         <div className="flex flex-col gap-6.75 overflow-y-scroll flex-1">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <ProductCheckout
-              key={index}
-              title={`Produto ${index + 1}`}
-              description="Descrição do produto que pode ser um pouco longa para testar o truncamento."
-              price={0.5 + index * 0.1}
-              imageUrl="https://softstar.s3.amazonaws.com/items/star-wand.png"
-            />
-          ))}
+          {items.length === 0 ? (
+            <div className="flex items-center justify-center h-full text-gray-custom">
+              <p>Seu carrinho está vazio</p>
+            </div>
+          ) : (
+            items.map((item) => (
+              <ProductCheckout
+                key={item.id}
+                item={item}
+              />
+            ))
+          )}
         </div>
 
         <div className="flex flex-col w-full h-max py-17.5 gap-17.5">
@@ -85,12 +94,15 @@ export default function SidebarDrawer({ isOpen, onClose, closeOnOverlayClick, ..
             <span>Total</span>
             <div className="flex flex-row gap-2.5 items-center">
               <Image src={ethereum} alt="Ethereum" width={29} height={29} />
-              <p className="text-xl font-semibold">44 ETH</p>
+              <p className="text-xl font-semibold">{total.toFixed(2)} ETH</p>
             </div>
           </div>
 
 
-          <button className="w-full bg-primary py-7.25 rounded-lg">
+          <button
+            className="w-full bg-primary py-7.25 rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50"
+            disabled={items.length === 0}
+          >
             Finalizar Compra
           </button>
         </div>

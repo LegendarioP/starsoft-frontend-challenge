@@ -1,15 +1,35 @@
 import ethereum from "@/assets/ethereum.png";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { addToCart } from "@/store/slices/cartSlice";
 import Image from "next/image";
 
 
 interface ProductCardProps {
+  id: number;
   title: string;
   description: string;
   price: number;
   imageUrl: string;
+  createdAt: string;
 }
 
-export default function ProductCard({ title, description, price, imageUrl }: ProductCardProps) {
+export default function ProductCard({ id, title, description, price, imageUrl, createdAt }: ProductCardProps) {
+  const dispatch = useAppDispatch();
+  const cartItems = useAppSelector((state) => state.cart.items);
+
+  const isProductInCart = cartItems.some((item) => item.id === id);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({
+      id,
+      name: title,
+      description,
+      price: price.toString(),
+      image: imageUrl,
+      createdAt,
+    }));
+  };
+
   return (
     <li className="bg-card-background py-6.5 px-6 w-full max-w-86.25 rounded-lg h-max">
 
@@ -27,8 +47,11 @@ export default function ProductCard({ title, description, price, imageUrl }: Pro
               <Image src={ethereum} alt="Ethereum" width={29} height={29} />
               <p className="text-xl font-semibold">{price} ETH</p>
             </div>
-            <button className="w-full py-5.5 bg-primary rounded-lg">
-              Comprar
+            <button
+              className="w-full py-5.5 bg-primary rounded-lg hover:bg-primary/90 transition-colors"
+              onClick={!isProductInCart ? handleAddToCart : undefined}
+            >
+              {isProductInCart ? 'Adicionado ao Carrinho' : 'Comprar'}
             </button>
 
           </div>

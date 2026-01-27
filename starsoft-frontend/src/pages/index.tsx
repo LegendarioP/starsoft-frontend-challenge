@@ -39,10 +39,12 @@ export default function Home({ initialData }: HomeProps) {
           {displayProducts.map((product) => (
             <ProductCard
               key={product.id}
+              id={product.id}
               title={product.name}
               description={product.description}
               price={parseFloat(product.price)}
               imageUrl={product.image}
+              createdAt={product.createdAt}
             />
           ))}
         </ul>
