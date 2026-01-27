@@ -1,9 +1,9 @@
-import ethereum from "@/assets/ethereum.png";
 import { Icons } from "@/components/icons/AppIcons";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { CartItem, decrementQuantity, incrementQuantity, removeFromCart } from "@/store/slices/cartSlice";
 import { motion } from "motion/react";
 import Image from "next/image";
+import PriceBadge from "../../PriceBadge";
 
 
 interface ProductCheckoutProps {
@@ -37,10 +37,7 @@ export default function ProductCheckout({ item }: ProductCheckoutProps) {
           </p>
         </div>
 
-        <div className="flex flex-row gap-2.5 items-center">
-          <Image src={ethereum} alt="Ethereum" width={29} height={29} />
-          <p className="text-xl font-semibold">{parseFloat(item.price)} ETH</p>
-        </div>
+        <PriceBadge price={parseFloat(item.price)} />
 
         <div className="w-full flex flex-row justify-between">
 

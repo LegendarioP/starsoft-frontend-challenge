@@ -1,7 +1,7 @@
-import ethereum from "@/assets/ethereum.png";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { addToCart } from "@/store/slices/cartSlice";
 import Image from "next/image";
+import PriceBadge from "../PriceBadge";
 import {
   BuyButton,
   CardContainer,
@@ -10,8 +10,6 @@ import {
   ImageContainer,
   InfoContainer,
   PriceContainer,
-  PriceRow,
-  PriceText,
   Title
 } from "./styles";
 
@@ -65,10 +63,8 @@ export default function ProductCard({ id, title, description, price, imageUrl, c
           <Description>{description}</Description>
 
           <PriceContainer>
-            <PriceRow>
-              <Image src={ethereum} alt="Ethereum" width={29} height={29} />
-              <PriceText>{price} ETH</PriceText>
-            </PriceRow>
+
+            <PriceBadge price={price} />
 
             <BuyButton
               onClick={!isProductInCart ? handleAddToCart : undefined}

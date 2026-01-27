@@ -54,19 +54,6 @@ export const PriceContainer = styled.div`
   padding-top: 1.25rem;
 `;
 
-export const PriceRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 0.3125rem;
-  align-items: center;
-`;
-
-export const PriceText = styled.p`
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  font-weight: 600;
-`;
-
 export const BuyButton = styled(motion.button)`
   width: 100%;
   padding: 1.375rem 0;
