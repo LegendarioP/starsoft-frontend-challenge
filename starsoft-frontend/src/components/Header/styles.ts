@@ -27,3 +27,10 @@ export const CartButton = styled.button`
     margin: 0;
   }
 `;
+
+export const BagIcon = styled.div`
+  color: ${({ theme }) => theme.colors.primary};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

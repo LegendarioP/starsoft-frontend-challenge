@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { Icons } from "../icons/AppIcons";
 import SidebarDrawer from "../sidebar/Drawer";
-import { CartButton, HeaderContainer } from "./styles";
+import { BagIcon, CartButton, HeaderContainer } from "./styles";
 
 export default function Header() {
   const dispatch = useAppDispatch();
@@ -30,7 +30,9 @@ export default function Header() {
       <Image src={brand} alt="Starsoft brand" width={101} height={38} />
       <CartButton onClick={() => dispatch(openCart())}>
         <motion.div animate={controls}>
-          <Icons.Bag className="text-primary" />
+          <BagIcon>
+            <Icons.Bag />
+          </BagIcon>
         </motion.div>
 
         {totalItems > 0 && (

@@ -52,6 +52,15 @@ export const BackButton = styled.button`
   }
 `;
 
+export const ArrowIcon = styled.div`
+  width: 2.0625rem;
+  height: 2.0625rem;
+  color: ${({ theme }) => theme.colors.primary};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const Title = styled.span`
   font-size: 1.5rem;
   line-height: 2rem;

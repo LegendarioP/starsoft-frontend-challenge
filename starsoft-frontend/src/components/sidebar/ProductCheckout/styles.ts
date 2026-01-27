@@ -109,3 +109,12 @@ export const RemoveButton = styled.button`
     background-color: ${({ theme }) => theme.colors.primary}e6;
   }
 `;
+
+export const TrashIcon = styled.div`
+  width: 1.5625rem;
+  height: 1.5625rem;
+  color: ${({ theme }) => theme.colors.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

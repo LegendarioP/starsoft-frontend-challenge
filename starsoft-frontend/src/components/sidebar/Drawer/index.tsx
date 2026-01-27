@@ -8,6 +8,7 @@ import ethereum from "@/assets/ethereum.png";
 import Image from "next/image";
 import { useEffect } from "react";
 import {
+  ArrowIcon,
   BackButton,
   CheckoutButton,
   DrawerPanel,
@@ -78,7 +79,9 @@ export default function SidebarDrawer() {
           >
             <Header>
               <BackButton onClick={handleClose}>
-                <Icons.ArrowLeft className="w-8.25 h-8.25 cursor-pointer text-primary" />
+                <ArrowIcon>
+                  <Icons.ArrowLeft />
+                </ArrowIcon>
               </BackButton>
               <Title>Mochila de Compras</Title>
             </Header>

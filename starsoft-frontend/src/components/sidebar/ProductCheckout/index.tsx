@@ -15,7 +15,8 @@ import {
   QuantityButton,
   QuantityControl,
   QuantityInput,
-  RemoveButton
+  RemoveButton,
+  TrashIcon
 } from "./styles";
 
 
@@ -68,7 +69,9 @@ export default function ProductCheckout({ item }: ProductCheckoutProps) {
           </QuantityControl>
 
           <RemoveButton onClick={() => dispatch(removeFromCart(item.id))}>
-            <Icons.TrashCan className="text-white w-6.25 h-6.25" />
+            <TrashIcon>
+              <Icons.TrashCan />
+            </TrashIcon>
           </RemoveButton>
         </ActionsRow>
       </ContentWrapper>
