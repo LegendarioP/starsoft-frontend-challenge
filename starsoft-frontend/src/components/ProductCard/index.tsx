@@ -1,8 +1,19 @@
 import ethereum from "@/assets/ethereum.png";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { addToCart } from "@/store/slices/cartSlice";
-import { motion } from "motion/react";
 import Image from "next/image";
+import {
+  BuyButton,
+  CardContainer,
+  CardContent,
+  Description,
+  ImageContainer,
+  InfoContainer,
+  PriceContainer,
+  PriceRow,
+  PriceText,
+  Title
+} from "./styles";
 
 
 interface ProductCardProps {
@@ -32,8 +43,7 @@ export default function ProductCard({ id, title, description, price, imageUrl, c
   };
 
   return (
-    <motion.li
-      className="bg-card-background py-6.5 px-6 w-full max-w-86.25 rounded-lg h-max"
+    <CardContainer
       whileHover={{
         scale: 1.05,
         y: -8,
@@ -45,23 +55,22 @@ export default function ProductCard({ id, title, description, price, imageUrl, c
         damping: 20
       }}
     >
-
-      <div className="flex flex-col gap-12.25">
-
-        <div className="bg-slate-custom w-full h-64.5 flex items-center justify-center rounded-lg">
+      <CardContent>
+        <ImageContainer>
           <Image src={imageUrl} alt={title} width={216} height={216} />
-        </div>
+        </ImageContainer>
 
-        <div className="flex flex-col gap-2.5 ">
-          <h3 className="text-lg">{title}</h3>
-          <p className="text-gray-custom text-xs font-light truncate">{description}</p>
-          <div className="flex flex-col gap-6 pt-5">
-            <div className="flex flex-row gap-1.25 items-center">
+        <InfoContainer>
+          <Title>{title}</Title>
+          <Description>{description}</Description>
+
+          <PriceContainer>
+            <PriceRow>
               <Image src={ethereum} alt="Ethereum" width={29} height={29} />
-              <p className="text-xl font-semibold">{price} ETH</p>
-            </div>
-            <motion.button
-              className="w-full py-5.5 bg-primary rounded-lg"
+              <PriceText>{price} ETH</PriceText>
+            </PriceRow>
+
+            <BuyButton
               onClick={!isProductInCart ? handleAddToCart : undefined}
               whileHover={{
                 scale: 1.05,
@@ -77,12 +86,10 @@ export default function ProductCard({ id, title, description, price, imageUrl, c
               disabled={isProductInCart}
             >
               {isProductInCart ? 'Adicionado ao Carrinho' : 'Comprar'}
-            </motion.button>
-
-          </div>
-        </div>
-      </div>
-
-    </motion.li>
+            </BuyButton>
+          </PriceContainer>
+        </InfoContainer>
+      </CardContent>
+    </CardContainer>
   )
 }
