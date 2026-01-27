@@ -1,7 +1,6 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
-import SidebarDrawer from "@/components/sidebar/Drawer";
 import { useProducts } from "@/hooks/useProducts";
 import { getProducts } from "@/services/products";
 import { ProductFilters, ProductListResponse } from "@/types/product";
@@ -66,8 +65,6 @@ export default function Home({ initialData }: HomeProps) {
       </main>
 
       <Footer />
-
-      <SidebarDrawer />
     </div>
   );
 }

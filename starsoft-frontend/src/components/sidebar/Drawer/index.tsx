@@ -4,23 +4,61 @@ import { cn } from "@/lib/utils";
 
 import ethereum from "@/assets/ethereum.png";
 import Image from "next/image";
+import { ComponentProps, useEffect } from "react";
+
+interface DrawerProps extends ComponentProps<"div"> {
+  isOpen: boolean;
+  onClose: () => void;
+  closeOnOverlayClick?: boolean;
+}
 
 
-export default function SidebarDrawer() {
+export default function SidebarDrawer({ isOpen, onClose, closeOnOverlayClick, ...props }: DrawerProps) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-end bg-black/80 backdrop-blur-sm animate-in fade-in duration-200 hidden!"
-    // onClick={closeOnOverlayClick ? onClose : undefined}
+      className={cn(
+        "fixed inset-0 z-50 flex items-center justify-end bg-black/80 backdrop-blur-sm animate-in fade-in duration-200",
+        !isOpen && "hidden"
+
+      )}
+      onClick={closeOnOverlayClick ? onClose : undefined}
+      data-open={isOpen}
     >
       <div
         className={cn(
           "relative bg-background rounded-sm shadow-xl w-169.75 h-full right-0 px-7.75 py-15.75 flex flex-col",
           "animate-in zoom-in-95 duration-200",
+          !isOpen && "hidden"
         )}
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="w-full h-max px-17.5 flex flex-row gap-21 items-center">
 
-          <button className="w-15 h-15 flex items-center justify-center rounded-full bg-[#373737]">
+          <button className="w-15 h-15 flex items-center justify-center rounded-full bg-[#373737]"
+            onClick={onClose}>
             <Icons.ArrowLeft className="w-8.25 h-8.25 cursor-pointer text-primary" />
           </button>
           <span className="text-2xl font-medium">
