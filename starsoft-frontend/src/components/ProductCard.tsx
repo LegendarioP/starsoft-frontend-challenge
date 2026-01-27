@@ -1,6 +1,7 @@
 import ethereum from "@/assets/ethereum.png";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { addToCart } from "@/store/slices/cartSlice";
+import { motion } from "motion/react";
 import Image from "next/image";
 
 
@@ -31,7 +32,19 @@ export default function ProductCard({ id, title, description, price, imageUrl, c
   };
 
   return (
-    <li className="bg-card-background py-6.5 px-6 w-full max-w-86.25 rounded-lg h-max">
+    <motion.li
+      className="bg-card-background py-6.5 px-6 w-full max-w-86.25 rounded-lg h-max"
+      whileHover={{
+        scale: 1.05,
+        y: -8,
+        boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)"
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 300,
+        damping: 20
+      }}
+    >
 
       <div className="flex flex-col gap-12.25">
 
@@ -47,17 +60,29 @@ export default function ProductCard({ id, title, description, price, imageUrl, c
               <Image src={ethereum} alt="Ethereum" width={29} height={29} />
               <p className="text-xl font-semibold">{price} ETH</p>
             </div>
-            <button
-              className="w-full py-5.5 bg-primary rounded-lg hover:bg-primary/90 transition-colors"
+            <motion.button
+              className="w-full py-5.5 bg-primary rounded-lg"
               onClick={!isProductInCart ? handleAddToCart : undefined}
+              whileHover={{
+                scale: 1.05,
+              }}
+              whileTap={{
+                scale: 0.95
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 17
+              }}
+              disabled={isProductInCart}
             >
               {isProductInCart ? 'Adicionado ao Carrinho' : 'Comprar'}
-            </button>
+            </motion.button>
 
           </div>
         </div>
       </div>
 
-    </li>
+    </motion.li>
   )
 }

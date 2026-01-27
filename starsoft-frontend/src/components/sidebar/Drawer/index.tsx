@@ -75,22 +75,24 @@ export default function SidebarDrawer() {
             </div>
 
 
-            <div className="flex flex-col gap-6.75 overflow-y-scroll flex-1">
+            <div className="flex flex-col gap-6.75 overflow-x-hidden overflow-y-scroll flex-1 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:transparent [&::-webkit-scrollbar-thumb]:bg-primary [&::-webkit-scrollbar-thumb]:rounded-lg ">
               {items.length === 0 ? (
                 <div className="flex items-center justify-center h-full text-gray-custom">
                   <p>Seu carrinho está vazio</p>
                 </div>
               ) : (
-                items.map((item) => (
-                  <ProductCheckout
-                    key={item.id}
-                    item={item}
-                  />
-                ))
+                <AnimatePresence mode="popLayout">
+                  {items.map((item) => (
+                    <ProductCheckout
+                      key={item.id}
+                      item={item}
+                    />
+                  ))}
+                </AnimatePresence>
               )}
             </div>
 
-            <div className="flex flex-col w-full h-max py-17.5 gap-17.5">
+            <div className="flex flex-col w-full h-max pt-17.5 gap-17.5">
 
               <div className="flex flex-row w-full justify-between">
                 <span>Total</span>

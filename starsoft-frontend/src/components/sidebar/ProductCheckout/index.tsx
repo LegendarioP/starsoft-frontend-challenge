@@ -2,6 +2,7 @@ import ethereum from "@/assets/ethereum.png";
 import { Icons } from "@/components/icons/AppIcons";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { CartItem, decrementQuantity, incrementQuantity, removeFromCart } from "@/store/slices/cartSlice";
+import { motion } from "motion/react";
 import Image from "next/image";
 
 
@@ -13,7 +14,14 @@ export default function ProductCheckout({ item }: ProductCheckoutProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="w-full px-7.5 py-5 flex flex-row gap-7.75 bg-[#2B2B2B] rounded-lg">
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, x: 100 }}
+      transition={{ duration: 0.3 }}
+      className="w-full px-7.5 py-5 flex flex-row gap-7.75 bg-[#2B2B2B] rounded-lg"
+    >
 
       <div className="flex">
         <div className="w-40.25 h-40.25 flex items-center justify-center bg-slate-custom rounded-lg">
@@ -43,7 +51,11 @@ export default function ProductCheckout({ item }: ProductCheckoutProps) {
             >
               <Icons.Minus className="group-hover:text-primary" />
             </button>
-            <input
+            <motion.input
+              key={item.quantity}
+              initial={{ scale: 1.3 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
               type="text"
               className="ring-0 outline-none w-full text-center bg-transparent"
               value={item.quantity}
@@ -67,6 +79,6 @@ export default function ProductCheckout({ item }: ProductCheckoutProps) {
 
       </div>
 
-    </div>
+    </motion.div>
   )
 }

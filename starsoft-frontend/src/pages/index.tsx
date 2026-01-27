@@ -4,6 +4,7 @@ import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
 import { getProducts } from "@/services/products";
 import { ProductFilters, ProductListResponse } from "@/types/product";
+import { motion } from "motion/react";
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
 
@@ -51,8 +52,13 @@ export default function Home({ initialData }: HomeProps) {
 
         <div className="flex justify-center">
           <div className="flex flex-col gap-2.75 w-max">
-            <div className="flex w-full h-2.5 bg-[#393939] rounded-lg">
-              <div className="bg-primary rounded-lg" style={{ width: `${paginationPercent}%` }} />
+            <div className="flex w-full h-2.5 bg-[#393939] rounded-lg overflow-hidden">
+              <motion.div
+                className="bg-primary rounded-lg"
+                initial={{ width: "0%" }}
+                animate={{ width: `${paginationPercent}%` }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              />
             </div>
 
             <button
