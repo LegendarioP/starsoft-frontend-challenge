@@ -2,11 +2,26 @@ import { Icons } from "@/components/icons/AppIcons";
 import ProductCheckout from "@/components/sidebar/ProductCheckout";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { closeCart } from "@/store/slices/cartSlice";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence } from "motion/react";
 
 import ethereum from "@/assets/ethereum.png";
 import Image from "next/image";
 import { useEffect } from "react";
+import {
+  BackButton,
+  CheckoutButton,
+  DrawerPanel,
+  EmptyCart,
+  Footer,
+  Header,
+  ItemsContainer,
+  Overlay,
+  Title,
+  TotalLabel,
+  TotalPrice,
+  TotalRow,
+  TotalValue
+} from "./styles";
 
 
 export default function SidebarDrawer() {
@@ -46,40 +61,33 @@ export default function SidebarDrawer() {
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
+        <Overlay
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-50 flex items-center justify-end bg-black/80 backdrop-blur-sm"
           onClick={handleClose}
           data-open={isOpen}
         >
-          <motion.div
+          <DrawerPanel
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="relative bg-background rounded-sm shadow-xl w-169.75 h-full right-0 px-7.75 py-15.75 flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-full h-max px-17.5 flex flex-row gap-21 items-center">
-
-              <button className="w-15 h-15 flex items-center justify-center rounded-full bg-[#373737]"
-                onClick={handleClose}>
+            <Header>
+              <BackButton onClick={handleClose}>
                 <Icons.ArrowLeft className="w-8.25 h-8.25 cursor-pointer text-primary" />
-              </button>
-              <span className="text-2xl font-medium">
-                Mochila de Compras
-              </span>
-            </div>
+              </BackButton>
+              <Title>Mochila de Compras</Title>
+            </Header>
 
-
-            <div className="flex flex-col gap-6.75 overflow-x-hidden overflow-y-scroll flex-1 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:transparent [&::-webkit-scrollbar-thumb]:bg-primary [&::-webkit-scrollbar-thumb]:rounded-lg ">
+            <ItemsContainer>
               {items.length === 0 ? (
-                <div className="flex items-center justify-center h-full text-gray-custom">
+                <EmptyCart>
                   <p>Seu carrinho está vazio</p>
-                </div>
+                </EmptyCart>
               ) : (
                 <AnimatePresence mode="popLayout">
                   {items.map((item) => (
@@ -90,30 +98,23 @@ export default function SidebarDrawer() {
                   ))}
                 </AnimatePresence>
               )}
-            </div>
+            </ItemsContainer>
 
-            <div className="flex flex-col w-full h-max pt-17.5 gap-17.5">
-
-              <div className="flex flex-row w-full justify-between">
-                <span>Total</span>
-                <div className="flex flex-row gap-2.5 items-center">
+            <Footer>
+              <TotalRow>
+                <TotalLabel>Total</TotalLabel>
+                <TotalPrice>
                   <Image src={ethereum} alt="Ethereum" width={29} height={29} />
-                  <p className="text-xl font-semibold">{total.toFixed(2)} ETH</p>
-                </div>
-              </div>
+                  <TotalValue>{total} ETH</TotalValue>
+                </TotalPrice>
+              </TotalRow>
 
-
-              <button
-                className="w-full bg-primary py-7.25 rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50"
-                disabled={items.length === 0}
-              >
+              <CheckoutButton disabled={items.length === 0}>
                 Finalizar Compra
-              </button>
-            </div>
-
-          </motion.div>
-
-        </motion.div>
+              </CheckoutButton>
+            </Footer>
+          </DrawerPanel>
+        </Overlay>
       )}
     </AnimatePresence>
   )
