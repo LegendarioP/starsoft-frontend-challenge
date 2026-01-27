@@ -1,8 +1,11 @@
 import StyledComponentsRegistry from "@/lib/registry";
 import { queryClient } from "@/services/queries";
+import { persistor, store } from "@/store";
 import { QueryClientProvider } from "@tanstack/react-query";
 import type { AppProps } from "next/app";
 import { Poppins } from "next/font/google";
+import { Provider } from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react';
 import "../app-old/globals.css";
 
 const poppins = Poppins({
@@ -13,12 +16,16 @@ const poppins = Poppins({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <StyledComponentsRegistry>
-        <div className={`${poppins.variable} antialiased`}>
-          <Component {...pageProps} />
-        </div>
-      </StyledComponentsRegistry>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <QueryClientProvider client={queryClient}>
+          <StyledComponentsRegistry>
+            <div className={`${poppins.variable} antialiased`}>
+              <Component {...pageProps} />
+            </div>
+          </StyledComponentsRegistry>
+        </QueryClientProvider>
+      </PersistGate>
+    </Provider>
   );
 }
