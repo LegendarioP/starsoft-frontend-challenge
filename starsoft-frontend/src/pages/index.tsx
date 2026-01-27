@@ -3,9 +3,6 @@ import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
 import { getProducts } from "@/services/products";
-import { ProductFilters, ProductListResponse } from "@/types/product";
-import { GetServerSideProps } from "next";
-import { useEffect, useState } from "react";
 import {
   LoadMoreButton,
   Main,
@@ -15,7 +12,10 @@ import {
   ProductGrid,
   ProgressBar,
   ProgressBarContainer
-} from "./styles";
+} from "@/styles/pages/home.styles";
+import { ProductFilters, ProductListResponse } from "@/types/product";
+import { GetServerSideProps } from "next";
+import { useEffect, useState } from "react";
 
 interface HomeProps {
   initialData: ProductListResponse;
