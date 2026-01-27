@@ -6,7 +6,6 @@ import type { AppProps } from "next/app";
 import { Poppins } from "next/font/google";
 import { Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react';
-import "../app-old/globals.css";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -16,16 +15,16 @@ const poppins = Poppins({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <QueryClientProvider client={queryClient}>
-          <StyledComponentsRegistry>
-            <div className={`${poppins.variable} antialiased`}>
+    <div className={poppins.className}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <QueryClientProvider client={queryClient}>
+            <StyledComponentsRegistry>
               <Component {...pageProps} />
-            </div>
-          </StyledComponentsRegistry>
-        </QueryClientProvider>
-      </PersistGate>
-    </Provider>
+            </StyledComponentsRegistry>
+          </QueryClientProvider>
+        </PersistGate>
+      </Provider>
+    </div>
   );
 }
