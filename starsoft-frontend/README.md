@@ -61,22 +61,17 @@ http://localhost:3000
 
 1. **Certifique-se de ter o Docker e Docker Compose instalados**
 
-2. **Configure as variáveis de ambiente:**
-```bash
-cp .env.example .env
-```
-
-3. **Execute o container:**
+2. **Execute o container:**
 ```bash
 docker-compose up --build
 ```
 
-4. **Acesse a aplicação:**
+3. **Acesse a aplicação:**
 ```
 http://localhost:3000
 ```
 
-5. **Para parar:**
+4. **Para parar:**
 ```bash
 docker-compose down
 ```
