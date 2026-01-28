@@ -6,7 +6,7 @@ import { AnimatePresence } from "motion/react";
 
 import ethereum from "@/assets/ethereum.png";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowIcon,
   BackButton,
@@ -28,6 +28,7 @@ import {
 export default function SidebarDrawer() {
   const dispatch = useAppDispatch();
   const { items, isOpen } = useAppSelector((state) => state.cart);
+  const [finishedBuying, setFinishedBuying] = useState(false);
 
   const handleClose = () => dispatch(closeCart());
 
@@ -58,6 +59,14 @@ export default function SidebarDrawer() {
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen]);
+
+  const handleFinishBuying = () => {
+    setFinishedBuying(true);
+    setTimeout(() => {
+      setFinishedBuying(false);
+      handleClose();
+    }, 2000);
+  }
 
   return (
     <AnimatePresence>
@@ -118,8 +127,9 @@ export default function SidebarDrawer() {
               <CheckoutButton
                 disabled={items.length === 0}
                 aria-label={items.length === 0 ? "Carrinho vazio. Adicione itens para finalizar a compra" : `Finalizar compra de ${items.length} ${items.length === 1 ? 'item' : 'itens'}`}
+                onClick={handleFinishBuying}
               >
-                Finalizar Compra
+                {finishedBuying ? "Compra Finalizada" : "Finalizar Compra"}
               </CheckoutButton>
             </Footer>
           </DrawerPanel>

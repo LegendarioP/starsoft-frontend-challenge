@@ -33,7 +33,7 @@ export const DrawerPanel = styled(motion.div)`
 export const Header = styled.div`
   width: 100%;
   height: max-content;
-  padding: 0 4.375rem;
+  padding: 0 4.375rem 2rem;
   display: flex;
   flex-direction: row;
   gap: 5.25rem;
