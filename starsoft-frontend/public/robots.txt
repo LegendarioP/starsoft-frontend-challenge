@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://starsoft-frontend.vercel.app/sitemap.xml
+Sitemap: URL DA APLICAÇÃO FRONTEND/sitemap.xml
