@@ -5,8 +5,10 @@ import { motion, useAnimation } from "motion/react";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { Icons } from "../icons/AppIcons";
-import SidebarDrawer from "../sidebar/Drawer";
 import { BagIcon, CartButton, HeaderContainer } from "./styles";
+
+
+
 
 export default function Header() {
   const dispatch = useAppDispatch();
@@ -53,7 +55,6 @@ export default function Header() {
           </motion.p>
         )}
       </CartButton>
-      <SidebarDrawer />
     </HeaderContainer>
   )
 }

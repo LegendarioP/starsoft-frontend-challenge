@@ -1,21 +1,28 @@
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import StyledComponentsRegistry from "@/lib/registry";
 import { queryClient } from "@/services/queries";
 import { persistor, store } from "@/store";
+import { PageContainer } from "@/styles/globals";
 import { QueryClientProvider } from "@tanstack/react-query";
 import type { AppProps } from "next/app";
+import dynamic from "next/dynamic";
 import { Poppins } from "next/font/google";
 import Head from "next/head";
 import { Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react';
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import { PageContainer } from "../styles/globals";
 
 const poppins = Poppins({
   variable: "--font-poppins",
   weight: ["300", "400", "500", "600", "700", "800"],
   subsets: ["latin"],
 });
+
+
+const SidebarDrawer = dynamic(() => import('@/components/sidebar/Drawer'), {
+  ssr: false,
+  loading: () => null,
+})
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -35,6 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
                   <Component {...pageProps} />
                   <Footer />
                 </PageContainer>
+                <SidebarDrawer />
               </StyledComponentsRegistry>
             </QueryClientProvider>
           </PersistGate>
