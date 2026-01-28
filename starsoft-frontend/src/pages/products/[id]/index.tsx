@@ -1,5 +1,5 @@
+import { MainContainer } from "@/styles/pages/ProductDetail.styles";
 import { GetServerSideProps } from "next";
-import { MainContainer } from "./styles";
 
 interface ProductDetailsProps {
   productID: string;
