@@ -59,15 +59,34 @@ http://localhost:3000
 
 ### Via Docker
 
-1. **Build e execute com Docker Compose:**
+1. **Certifique-se de ter o Docker e Docker Compose instalados**
+
+2. **Configure as variáveis de ambiente:**
+```bash
+cp .env.example .env
+```
+
+3. **Execute o container:**
 ```bash
 docker-compose up --build
 ```
 
-2. **Acesse a aplicação:**
+4. **Acesse a aplicação:**
 ```
 http://localhost:3000
 ```
+
+5. **Para parar:**
+```bash
+docker-compose down
+```
+
+**Detalhes da Configuração Docker:**
+- Arquivo `Dockerfile` multi-stage para otimização de tamanho
+- Imagem base: `node:20-alpine` (leve e segura)
+- Build em modo produção
+- Porta 3000 exposta
+- docker-compose.yml orquestra o serviço completo
 
 ### Scripts Disponíveis
 
@@ -282,6 +301,83 @@ Implementação completa de boas práticas de acessibilidade:
 
 ---
 
+## 🛠️ Tecnologias e Justificativas Técnicas
+
+### Frontend Framework
+
+- **Next.js 16.1.4**: Escolhido por oferecer SSR (Server-Side Rendering) nativo, otimização automática de imagens, code splitting, e sistema de rotas baseado em arquivos. Essencial para SEO e performance.
+- **React 19.2.3 com React Compiler**: Versão mais recente com auto-memoização, eliminando necessidade de useMemo/useCallback manual, resultando em código mais limpo e performático.
+
+### Gerenciamento de Estado
+
+- **Redux Toolkit 2.11.2**: Escolhido pela simplicidade na configuração de slices, imutabilidade nativa (Immer), e excelente DevTools. Preferível ao Context API para estados complexos e compartilhados.
+- **redux-persist 6.0.0**: Persistência automática do carrinho no localStorage, evitando perda de dados ao recarregar a página.
+
+### Data Fetching
+
+- **TanStack React Query 5.90.19**: Cache inteligente, invalidação automática, infinite scroll nativo, e melhor UX com estados de loading/error. Superior ao fetch direto ou useEffect manual.
+
+### Estilização e Animações
+
+- **Styled Components 6.3.8**: CSS-in-JS com TypeScript support, theming global, e componentes isolados. Preferível ao SASS por co-localizar estilos com componentes.
+- **Framer Motion 12.29.2**: Biblioteca declarativa para animações complexas, com suporte a gestures, variants, e performance otimizada via GPU.
+
+### Qualidade de Código
+
+- **TypeScript 5.x (strict mode)**: Type safety, autocomplete, e detecção de erros em tempo de desenvolvimento. Reduz bugs em produção.
+- **ESLint 9 + Prettier 3.4.2**: Consistência de código, integração sem conflitos, e formatação automática. Essencial para trabalho em equipe.
+- **Vitest 4.0.18**: Test runner moderno, compatível com ES modules, mais rápido que Jest, e melhor integração com TypeScript.
+
+### DevOps
+
+- **Docker + docker-compose**: Ambiente consistente entre desenvolvimento e produção, eliminando "funciona na minha máquina". Facilita onboarding de novos desenvolvedores.
+
+---
+
+## Possíveis Limitações e Melhorias Futuras
+
+### Limitações Atuais
+
+1. **API Mock**: Dados da API são estáticos. Em produção, seria necessário backend real com autenticação.
+2. **Pagamento**: Carrinho não integra com gateway de pagamento (Stripe, PayPal).
+3. **Autenticação**: Não há sistema de login/registro de usuários.
+4. **Favoritos**: Funcionalidade de "wishlist" não implementada.
+5. **Filtros Avançados**: Apenas listagem básica, sem filtros por preço, categoria, ou raridade.
+
+### Melhorias Futuras
+
+#### Funcionalidades
+- [ ] **Sistema de autenticação** com NextAuth.js (OAuth com Google, Metamask)
+- [ ] **Integração Web3** para compra real de NFTs (ethers.js, wagmi)
+- [ ] **Perfil de usuário** com histórico de compras e coleção
+- [ ] **Sistema de favoritos** persistido no backend
+- [ ] **Filtros e busca avançada** (preço, raridade, blockchain, categoria)
+- [ ] **Notificações** (toast messages para ações do carrinho)
+- [ ] **Compartilhamento social** (Open Graph, Twitter Cards)
+
+#### Performance
+- [ ] **Imagens otimizadas** com Cloudflare Images ou Cloudinary
+- [ ] **Service Worker** para cache offline (PWA)
+- [ ] **Skeleton loading** em mais componentes (já implementado em ProductCard)
+- [ ] **Lazy loading** de componentes pesados
+- [ ] **Bundle analysis** para otimização de tamanho
+
+#### Qualidade
+- [ ] **Testes E2E** com Playwright ou Cypress
+- [ ] **Testes de performance** com Lighthouse CI
+- [ ] **Storybook** para documentação de componentes
+- [ ] **Análise de acessibilidade** com axe-core
+- [ ] **Cobertura de testes** acima de 90%
+
+#### DevOps
+- [ ] **CI/CD** com GitHub Actions (lint, test, build, deploy)
+- [ ] **Deploy automatizado** na Vercel ou AWS
+- [ ] **Monitoramento** com Sentry (error tracking)
+- [ ] **Analytics** com Google Analytics ou Plausible
+- [ ] **Health checks** e logs estruturados
+
+---
+
 ## SEO
 
 ### Implementações
@@ -300,3 +396,23 @@ Implementação completa de boas práticas de acessibilidade:
 siteUrl: process.env.NEXT_PUBLIC_SITE_URL
 generateRobotsTxt: true
 ```
+
+---
+
+## 📝 Histórico de Commits
+
+O desenvolvimento foi organizado em commits claros e objetivos, refletindo o progresso incremental:
+
+- Setup inicial do projeto (Next.js + TypeScript + Redux Toolkit)
+- Configuração do Redux Store e slices (cartSlice)
+- Integração com React Query para listagem de produtos
+- Desenvolvimento dos componentes UI (Header, ProductCard, Footer)
+- Implementação do carrinho com Drawer e animações
+- Migração completa para Styled Components
+- Adição de testes automatizados (79 testes)
+- Configuração de Docker e docker-compose
+- Implementação de SEO (sitemap, robots.txt, meta tags)
+- Configuração de ESLint e Prettier
+- Documentação final do README
+
+---
