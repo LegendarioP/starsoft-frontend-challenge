@@ -72,14 +72,58 @@ http://localhost:3000
 ### Scripts Disponíveis
 
 ```bash
-npm run dev          # Inicia o servidor de desenvolvimento
-npm run build        # Cria build de produção
-npm run start        # Inicia o servidor de produção
-npm run test         # Executa os testes
-npm run test:watch   # Executa os testes em modo watch
+npm run dev           # Inicia o servidor de desenvolvimento
+npm run build         # Cria build de produção
+npm run start         # Inicia o servidor de produção
+npm run lint          # Executa o linter (ESLint)
+npm run format        # Formata o código com Prettier
+npm run format:check  # Verifica formatação sem modificar
+npm run test          # Executa os testes
+npm run test:watch    # Executa os testes em modo watch
 npm run test:coverage # Gera relatório de cobertura
-npm run lint         # Executa o linter
 ```
+
+---
+
+##  Padrões de Código
+
+### ESLint
+
+O projeto utiliza ESLint com as configurações do Next.js para garantir qualidade e consistência do código:
+
+```javascript
+// eslint.config.mjs
+- eslint-config-next/core-web-vitals
+- eslint-config-next/typescript
+- eslint-config-prettier (desabilita regras conflitantes)
+```
+
+**Executar o linter:**
+```bash
+npm run lint
+```
+
+### Prettier
+
+Configurado para formatação automática e consistente do código:
+
+```json
+// .prettierrc
+{
+  "semi": true,
+  "singleQuote": true,
+  "printWidth": 100,
+  "tabWidth": 2,
+  "trailingComma": "es5"
+}
+```
+
+**Comandos:**
+```bash
+npm run format        # Formata todos os arquivos
+npm run format:check  # Verifica formatação
+```
+
 
 ## Estrutura do Projeto
 
@@ -128,7 +172,10 @@ starsoft-frontend/
 │   └── types/               # Tipos TypeScript
 │       └── product.ts
 ├── .env.example             # Variáveis de ambiente
+├── .prettierrc              # Configuração do Prettier
+├── .prettierignore          # Arquivos ignorados pelo Prettier
 ├── docker-compose.yml       # Orquestração Docker
+├── eslint.config.mjs        # Configuração do ESLint
 ├── next-sitemap.config.js   # Configuração do sitemap
 ├── package.json
 ├── tsconfig.json
@@ -137,9 +184,9 @@ starsoft-frontend/
 
 ---
 
-## Funcionalidades Implementadas
+## 🎯 Funcionalidades Implementadas
 
-### Obrigatórias
+###  Obrigatórias
 
 - [x] **Listagem de NFTs** com dados da API fornecida
 - [x] **Paginação infinita** (scroll infinito) com indicador visual de progresso
@@ -154,11 +201,12 @@ starsoft-frontend/
   - Hover effects
   - Loading states
 - [x] **Rotas dinâmicas** para detalhes dos produtos com SSR
-- [x] **Testes automatizados** (79 testes com Jest/Testing Library)
+- [x] **Testes automatizados** (79 testes com Vitest/Testing Library)
 - [x] **TypeScript** em todo o projeto
 - [x] **Docker** configurado para produção
+- [x] **ESLint e Prettier** configurados e integrados
 
-### Desejáveis
+###  Desejáveis
 
 - [x] **Animações avançadas** com Framer Motion
 - [x] **Next.js 14+** (versão 16.1.4)
