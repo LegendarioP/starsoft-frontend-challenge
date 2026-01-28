@@ -5,7 +5,7 @@ Marketplace de NFTs desenvolvido como desafio técnico para a Starsoft. Uma apli
 ![Next.js](https://img.shields.io/badge/Next.js-16.1.4-black?style=flat&logo=next.js)
 ![React](https://img.shields.io/badge/React-19.2.3-61DAFB?style=flat&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat&logo=typescript)
-![Tests](https://img.shields.io/badge/Tests-79%20passing-success?style=flat)
+![Tests](https://img.shields.io/badge/Tests-63%20passing-success?style=flat)
 
 ---
 
@@ -17,7 +17,7 @@ Marketplace de NFTs desenvolvido como desafio técnico para a Starsoft. Uma apli
 - **Design responsivo** para todas as telas
 - **Acessibilidade** com ARIA labels e navegação por teclado
 - **Performance otimizada** com React Compiler e SSR
-- **79 testes automatizados** com 100% de aprovação
+- **63 testes automatizados** com 100% de aprovação
 - **SEO otimizado** com sitemap e meta tags
 
 ---
@@ -220,7 +220,7 @@ starsoft-frontend/
   - Hover effects
   - Loading states
 - [x] **Rotas dinâmicas** para detalhes dos produtos com SSR
-- [x] **Testes automatizados** (79 testes com Vitest/Testing Library)
+- [x] **Testes automatizados** (63 testes com Vitest/Testing Library)
 - [x] **TypeScript** em todo o projeto
 - [x] **Docker** configurado para produção
 - [x] **ESLint e Prettier** configurados e integrados
@@ -238,10 +238,9 @@ starsoft-frontend/
 
 ## Testes
 
-### Cobertura Completa - 79 Testes
+### Cobertura Completa - 63 Testes
 
 ```bash
-✓ src/hooks/useProducts.spec.ts (16 tests)
 ✓ src/store/slices/index.spec.ts (16 tests)
 ✓ src/components/Footer/index.spec.tsx (3 tests)
 ✓ src/components/PriceBadge/index.spec.tsx (7 tests)
@@ -250,8 +249,8 @@ starsoft-frontend/
 ✓ src/components/sidebar/ProductCheckout/index.spec.tsx (9 tests)
 ✓ src/components/sidebar/Drawer/index.spec.tsx (14 tests)
 
-Test Files  8 passed (8)
-Tests       79 passed (79)
+Test Files  7 passed (7)
+Tests       63 passed (63)
 ```
 
 ### Executar Testes
@@ -409,7 +408,7 @@ O desenvolvimento foi organizado em commits claros e objetivos, refletindo o pro
 - Desenvolvimento dos componentes UI (Header, ProductCard, Footer)
 - Implementação do carrinho com Drawer e animações
 - Migração completa para Styled Components
-- Adição de testes automatizados (79 testes)
+- Adição de testes automatizados (63 testes)
 - Configuração de Docker e docker-compose
 - Implementação de SEO (sitemap, robots.txt, meta tags)
 - Configuração de ESLint e Prettier
